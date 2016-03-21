@@ -6,7 +6,7 @@
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 10:09:54 by mchevall          #+#    #+#             */
-/*   Updated: 2016/03/21 18:27:37 by mchevall         ###   ########.fr       */
+/*   Updated: 2016/03/21 18:44:38 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h>
@@ -28,6 +28,7 @@ int			ft_printf(const char *format, ...)
 	int				j;
 	int				k;
 
+	var = NULL;
 	i = 0;
 	j = 0;
 	k = 0;
