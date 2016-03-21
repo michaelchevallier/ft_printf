@@ -6,7 +6,7 @@
 #    By: mchevall <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/26 14:43:40 by mchevall          #+#    #+#              #
-#    Updated: 2016/03/15 13:22:17 by mchevall         ###   ########.fr        #
+#    Updated: 2016/03/21 18:40:31 by mchevall         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ all: $(NAME)
 
 $(NAME): $(SRCO)
 	make -C libft
-	ar rc $(NAME) $(SRCO) $(LIBSRCO)
+	cp $(LIB) $(addprefix ../,$(NAME))
+	ar rc $(NAME) $(SRCO)
 	ranlib $(NAME)
 
 clean:

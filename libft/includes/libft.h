@@ -6,7 +6,7 @@
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 17:42:19 by mchevall          #+#    #+#             */
-/*   Updated: 2016/02/02 14:25:25 by mchevall         ###   ########.fr       */
+/*   Updated: 2016/03/21 17:09:29 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define LIBFT_H
 # define BUFF_SIZE 4096
 # include <string.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 typedef struct	s_list
 {
@@ -35,6 +37,8 @@ int				ft_isdigit(int c);
 int				ft_isprint(int c);
 int				ft_isprime(int nb);
 char			*ft_itoa(int n);
+char			*ft_itoa_base(intmax_t n, int base);
+char			*ft_itoa_baseuint(uintmax_t n, int base);
 void			ft_foreach(int *tab, size_t length, void (*f)(int));
 int				get_next_line(int const fd, char **line);
 int				ft_lenwords(const char *s, char c, int word);
