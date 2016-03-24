@@ -6,15 +6,16 @@
 #    By: mchevall <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/26 14:43:40 by mchevall          #+#    #+#              #
-#    Updated: 2016/03/21 18:47:19 by mchevall         ###   ########.fr        #
+#    Updated: 2016/03/24 17:14:25 by mchevall         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 LIB = libft/libft.a
-SRC = ft_printf.c
+SRC = ft_printf.c\
+	  specifier_finder.c\
+	  format_specifier_manager.c
 SRCO = $(SRC:.c=.o)
-LIBSRCO = libft/*.o
 FLAG = -Wall -Werror -Wextra
 
 all: $(NAME)
@@ -26,6 +27,8 @@ $(NAME): $(SRCO)
 	cp $(LIB) $(NAME)
 	ar r $(NAME) $(SRCO)
 	ranlib $(NAME)
+	gcc $(SRC) $(NAME)
+	./a.out
 
 clean:
 	make -C libft clean

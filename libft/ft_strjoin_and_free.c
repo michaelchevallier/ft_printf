@@ -1,41 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   multiplication.c                                   :+:      :+:    :+:   */
+/*   ft_strjoin_and_free.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/15 14:13:35 by mchevall          #+#    #+#             */
-/*   Updated: 2016/03/15 17:26:14 by mchevall         ###   ########.fr       */
+/*   Created: 2016/03/22 17:46:24 by mchevall          #+#    #+#             */
+/*   Updated: 2016/03/22 17:46:26 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdio.h>
-#include <stdarg.h>
-#include <string.h>
 
-void	multiplication(int *resultat, ...)
+#include "libft.h"
+
+char		*ft_strjoin_and_free(char *s1, char *s2)
 {
-	int		parametre;
-	va_list 	ap;
+	char	*str;
 
-	parametre = 1;
-	*resultat = 1;
-	va_start(ap, resultat);
-	while (parametre)
-	{
-		*resultat *= parametre;
-		parametre = va_arg(ap,int);
-	}
-	va_end(ap);
-}
-
-int main(void)
-{
-	int *toto;
-
-	*toto = 0;
-	multiplication(toto, 5, 5, 5);
-	printf ("%d\n", *toto);
-
-	return (0);
+	if (s1 == NULL || s2 == NULL)
+		return (NULL);
+	str = ft_strnew(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!str)
+		return (NULL);
+	str = ft_strcat(str, s1);
+	str = ft_strcat(str, s2);
+	ft_strdel(&s1);
+	ft_strdel(&s2);
+	return (str);
 }

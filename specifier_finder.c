@@ -6,7 +6,7 @@
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 17:20:28 by mchevall          #+#    #+#             */
-/*   Updated: 2016/03/22 18:39:22 by mchevall         ###   ########.fr       */
+/*   Updated: 2016/03/24 17:50:05 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int			specifier_finder(const char *format, t_var *var, int i, va_list ap)
 	j = 0;
 	k = 0;
 	var_initializer(var);
-	while((format[i + j] != SPECIFIER[k]) && format[i])
+	while ((format[i + j] != SPECIFIER[k]) && format[i])
 	{
 		var->arg = va_arg(ap, void *);
 		while (format[i + j] != SPECIFIER[k] &&
@@ -33,8 +33,8 @@ int			specifier_finder(const char *format, t_var *var, int i, va_list ap)
 			if (SPECIFIER[k] == format[i + j] && k < ft_strlen(SPECIFIER))
 				var->specifier = k;
 			if (k == ft_strlen(SPECIFIER))
-				var->str = ft_strjoin_and_free(var->str,
-						ft_strsub(format, i + j, 1));
+				var->format_specifier = ft_strjoin_and_free
+(var->format_specifier, ft_strsub(format, i + j, 1));
 		}
 	}
 	i = i + j;
