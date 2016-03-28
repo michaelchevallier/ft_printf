@@ -58,7 +58,7 @@ int			ft_printf(const char *format, ...)
 		}
 		i++;
 	}
-	printf("\nspec:%c\n", SPECIFIER[var->specifier]);
+	printf("\nsc:%c\n", SPECIFIER[var->specifier]);
 	printf("arg:%d\n", (int)var->arg);
 	printf("fspe:%s\n", var->format_specifier);
 	printf("str:%s\n", var->str);
@@ -67,14 +67,16 @@ int			ft_printf(const char *format, ...)
 	printf("error: %d\n", var->error);
 	printf("precision: %d\n", var->precision);
 	printf("modifier: %s\n", var->modifier);
+	ft_putstr("\nstr :");
+	if (var->error != -1)
+		ft_putstr(var->str);
 	va_end(ap);
 	return (var->error);
 }
 
 int 		main(void)
 {
-	//printf("%d\n",ft_atoi(""));
-	printf("%3.9zd\n", 42);
-	ft_printf("Toto \n%0+-#3.9lhd tata", 42);
+	printf("Original printf %d\n",42);
+	ft_printf("Toto \n%0+-#3.9ld tata", 42);
 	return (0);
 }

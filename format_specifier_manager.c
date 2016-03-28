@@ -14,7 +14,7 @@
 
 static int			remove_flags(t_var *var)
 {
-	if (ft_strchr("sSdDiuUcCnp", SPECIFIER[var->specifier]) != NULL)
+	if (ft_strchr("sSdDiuUcC", SPECIFIER[var->specifier]) != NULL)
 		var->flags[0] = 0;
 	if (var->flags[4] == 1 && var->flags[1] == 1)
 		var->flags[1] = 0;
@@ -59,10 +59,8 @@ static int			valid_flags(t_var *var)
 static int			is_modifier(t_var *var, int counter)
 {
 	int			i;
-	int			j;
 
 	i = 0;
-	j = 0;
 	while (var->FS[counter + i] != '\0')
 	{
 		if (ft_strchr(MODIFIER, var->FS[counter + i]) != NULL)
@@ -88,10 +86,8 @@ static int			is_modifier(t_var *var, int counter)
 void				format_specifier_manager(t_var *var)
 {
 	int			counter;
-	int			i;
 
 	counter = 0;
-	i = 0;
 	var->tmp = var->format_specifier;
 	counter = valid_flags(var);
 	var->width = ft_atoi(&var->FS[counter]);
