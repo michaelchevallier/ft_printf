@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
+/*   ft_itoa_baseuint.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/15 17:11:24 by mchevall          #+#    #+#             */
-/*   Updated: 2016/03/21 17:11:50 by mchevall         ###   ########.fr       */
+/*   Created: 2016/03/29 13:05:54 by mchevall          #+#    #+#             */
+/*   Updated: 2016/03/31 14:15:21 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,4 @@ char					*ft_itoa_baseuint(uintmax_t n, int base)
 	}
 	chain = calc(n, i, chain, base);
 	return (chain);
-}
-
-int main (void)
-{
-	ft_putstr(ft_itoa_baseuint(255,16));
-		return (0);
 }

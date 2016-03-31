@@ -6,7 +6,7 @@
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 17:20:28 by mchevall          #+#    #+#             */
-/*   Updated: 2016/03/24 17:50:05 by mchevall         ###   ########.fr       */
+/*   Updated: 2016/03/31 14:01:18 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int			specifier_finder(const char *format, t_var *var, int i, va_list ap)
 				var->specifier = k;
 			if (k == ft_strlen(SPECIFIER))
 				var->format_specifier = ft_strjoin_and_free
-(var->format_specifier, ft_strsub(format, i + j, 1));
+(var->format_specifier, ft_strsub(format, i + j, 1), 0);
 		}
 	}
 	i = i + j;

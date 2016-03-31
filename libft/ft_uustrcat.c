@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin_and_free.c                              :+:      :+:    :+:   */
+/*   ft_uustrcat.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/22 17:46:24 by mchevall          #+#    #+#             */
-/*   Updated: 2016/03/31 14:37:28 by mchevall         ###   ########.fr       */
+/*   Created: 2016/03/31 14:41:05 by mchevall          #+#    #+#             */
+/*   Updated: 2016/03/31 14:50:08 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_strjoin_and_free(char *s1, char *s2, int n)
+unsigned char		*ft_uustrcat(unsigned char *s1, unsigned char *s2)
 {
-	char	*str;
+	size_t		s1_len;
+	size_t		s2_len;
+	size_t		total_len;
+	size_t		i;
 
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
-	str = ft_strnew(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (!str)
-		return (NULL);
-	str = ft_strcat(str, s1);
-	str = ft_strcat(str, s2);
-	if (n == 0)
+	s1_len = ft_ustrlen(s1);
+	s2_len = ft_ustrlen(s2);
+	total_len = s1_len + s2_len;
+	i = 0;
+	while (s1_len < total_len + 1)
 	{
-		ft_strdel(&s1);
-		ft_strdel(&s2);
+		s1[s1_len] = s2[i];
+		s1_len++;
+		i++;
 	}
-	else if (n == 1)
-		ft_strdel(&s1);
-	else if (n == 2)
-		ft_strdel(&s2);
-	return (str);
+	return (s1);
 }

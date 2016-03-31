@@ -6,7 +6,7 @@
 #    By: mchevall <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 16:28:30 by mchevall          #+#    #+#              #
-#    Updated: 2016/03/22 17:46:51 by mchevall         ###   ########.fr        #
+#    Updated: 2016/03/31 17:51:08 by mchevall         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,9 @@ ft_2dtab.c ft_strsplit.c ft_strrev.c ft_lstnew.c ft_lstdelone.c ft_lstdel.c\
 ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_sort_int_tab.c ft_isprime.c\
 ft_foreach.c clean_open.c clean_read.c get_next_line.c ft_countwords.c\
 ft_lenwords.c ft_error.c ft_itoa_base.c ft_itoa_baseuint.c\
-ft_strjoin_and_free.c
+ft_strjoin_and_free.c ft_stringupper.c ft_ustrcat.c ft_ustrdel.c\
+ft_ustrjoin_and_free.c ft_ustrlen.c ft_ustrnew.c ft_uustrcat.c\
+ft_ustrsub.c ft_wcharlen.c ft_uputchar.c ft_uputstr.c
 SRCO = $(SRC:.c=.o)
 HEADERS = includes
 CC = gcc

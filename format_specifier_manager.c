@@ -6,7 +6,7 @@
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 17:49:49 by mchevall          #+#    #+#             */
-/*   Updated: 2016/03/24 19:52:14 by mchevall         ###   ########.fr       */
+/*   Updated: 2016/03/31 14:58:05 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,20 @@ static int			is_modifier(t_var *var, int counter)
 	{
 		if (ft_strchr(MODIFIER, var->FS[counter + i]) != NULL)
 			var->modifier = ft_strjoin_and_free
-(var->modifier, ft_strsub(var->FS, counter + i, 1));
+(var->modifier, ft_strsub(var->FS, counter + i, 1), 0);
 		else
-			return (-1);
+			return ((var->error = -6));
 		i++;
 	}
-	if (ft_strlen(var->modifier) > 2)
-		return (-1);
-	if (ft_strlen(var->modifier) == 2)
+	if ((var->mod_len = ft_strlen(var->modifier)) > 2)
+		return ((var->error = -7));
+	if (var->mod_len == 2)
 	{
-		if (var->modifier[0] != 'h' || var->modifier[0] != 'l')
-			return (-1);
+		if (var->modifier[0] != 'h' && var->modifier[0] != 'l')
+			return ((var->error = -8));
 		if ((var->modifier[0] == 'h' && var->modifier[1] != 'h') ||
 			(var->modifier[0] == 'l' && var->modifier[1] != 'l'))
-			return (-1);
+			return ((var->error = -9));
 	}
 	return (1);
 }
@@ -98,10 +98,6 @@ void				format_specifier_manager(t_var *var)
 		var->precision = ft_atoi(&var->FS[counter + 1]);
 		counter += 1 + ft_strlen(ft_itoa(var->precision));
 	}
-	if (ft_strlen(&var->FS[counter]) > 0)
-	{
-		if (is_modifier(var, counter) == -1)
-			var->error = -1;
-	}
+	is_modifier(var, counter);
 	remove_flags(var);
 }
