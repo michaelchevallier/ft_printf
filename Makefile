@@ -6,7 +6,7 @@
 #    By: mchevall <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/26 14:43:40 by mchevall          #+#    #+#              #
-#    Updated: 2016/03/31 17:14:13 by mchevall         ###   ########.fr        #
+#    Updated: 2016/04/12 14:12:54 by mchevall         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,10 @@ SRC = ft_printf.c\
 	  wchar_manager.c\
 	  funcs.c\
 	  funcs2.c\
-	  wstr_manager.c
+	  wstr_manager.c\
+	  precision_manager.c\
+	  flag_manager.c\
+	  width_manager.c
 SRCO = $(SRC:.c=.o)
 ##FLAG = -Wall -Werror -Wextra
 
@@ -34,8 +37,6 @@ $(NAME): $(SRCO)
 	cp $(LIB) $(NAME)
 	ar r $(NAME) $(SRCO)
 	ranlib $(NAME)
-	gcc $(SRC) $(NAME)
-	./a.out
 
 clean:
 	make -C libft clean

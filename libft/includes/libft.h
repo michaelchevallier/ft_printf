@@ -6,7 +6,7 @@
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 17:42:19 by mchevall          #+#    #+#             */
-/*   Updated: 2016/03/22 17:48:20 by mchevall         ###   ########.fr       */
+/*   Updated: 2016/04/12 15:38:45 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void			ft_bzero(void *s, size_t n);
 int				clean_open(const char *path, int flag);
 int				clean_read(int fildes, char *buf, size_t nbyte);
 int				ft_countwords(const char *s, char c);
+intmax_t		ft_intmaxuatoi(const unsigned char *str);
 int				ft_isalnum(int c);
 int				ft_isalpha(int c);
 int				ft_isascii(int c);
@@ -37,7 +38,7 @@ int				ft_isdigit(int c);
 int				ft_isprint(int c);
 int				ft_isprime(int nb);
 char			*ft_itoa(int n);
-char			*ft_itoa_base(intmax_t n, int base);
+char			*ft_itoa_base(intmax_t n, size_t base);
 char			*ft_itoa_baseuint(uintmax_t n, int base);
 void			ft_foreach(int *tab, size_t length, void (*f)(int));
 int				get_next_line(int const fd, char **line);
@@ -73,10 +74,11 @@ char			*ft_strcpy(char *dst, const char *src);
 void			ft_strdel(char **as);
 char			*ft_strdup(const char *s1);
 int				ft_strequ(char const *s1, char const *s2);
+char			*ft_stringupper(char *str);
 void			ft_striter(char *s, void (*f)(char *));
 void			ft_striteri(char *s, void (*f)(unsigned int, char *));
 char			*ft_strjoin(char const *s1, char const *s2);
-char			*ft_strjoin_and_free(char *s1, char *s2);
+char			*ft_strjoin_and_free(char *s1, char *s2, int n);
 size_t			ft_strlcat(char *dst, const char *src, size_t size);
 size_t			ft_strlen(const char *s);
 char			*ft_strmap(char const *s, char (*f)(char));
@@ -95,4 +97,19 @@ char			*ft_strsub(char const *s, unsigned int start, size_t len);
 char			*ft_strtrim(char const *s);
 int				ft_tolower(int c);
 int				ft_toupper(int c);
+int				ft_uatoi(const unsigned char *str);
+uintmax_t		ft_uintmaxuatoi(const unsigned char *str);
+void			ft_uputchar(unsigned char c);
+void			ft_uputstr(unsigned char *s);
+unsigned char	*ft_ustrcat(unsigned char *s1, char *s2);
+unsigned char	*ft_uustrcat(unsigned char *s1, unsigned char *s2);
+void			ft_ustrdel(unsigned char **as);
+unsigned char	*ft_ustrdup(unsigned char *s1);
+unsigned char	*ft_ustrjoin_and_free(unsigned char *s1, char *s2, int n);
+unsigned char	*ft_uustrjoin_and_free(unsigned char *s1, unsigned char *s2,
+		int n);
+size_t			ft_ustrlen(unsigned char *s);
+unsigned char	*ft_ustrsub(unsigned char *s, unsigned int start, size_t len);
+unsigned char	*ft_ustrnew(size_t size);
+size_t			ft_wcharlen(const wchar_t *wchar);
 #endif

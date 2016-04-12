@@ -6,7 +6,7 @@
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 13:05:54 by mchevall          #+#    #+#             */
-/*   Updated: 2016/03/31 14:15:21 by mchevall         ###   ########.fr       */
+/*   Updated: 2016/04/07 18:58:14 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char				*calc(uintmax_t n, int i, char *chain, int base)
 	nb = n;
 	while (nb > 0)
 	{
-		if (nb % base > 10)
+		if (base >= 10 && nb % base >= 10)
 			chain[i] = ((nb % base - 10 + 97));
 		else
 			chain[i] = ((nb % base + 48));

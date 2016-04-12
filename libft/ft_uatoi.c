@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_uatoi.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/04 15:53:09 by mchevall          #+#    #+#             */
-/*   Updated: 2016/04/04 15:53:40 by mchevall         ###   ########.fr       */
+/*   Created: 2016/04/04 15:53:54 by mchevall          #+#    #+#             */
+/*   Updated: 2016/04/06 16:00:44 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
 
-int		ft_atoi(const char *str)
+int		ft_uatoi(const unsigned char *str)
 {
 	size_t		i;
 	int			isneg;

@@ -6,7 +6,7 @@
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 16:08:00 by mchevall          #+#    #+#             */
-/*   Updated: 2016/03/31 18:14:55 by mchevall         ###   ########.fr       */
+/*   Updated: 2016/04/11 16:53:04 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,19 +71,16 @@ int				spec_lx(t_var *var)
 
 int				spec_c(t_var *var)
 {
-	t_wchar		*wchar;
-
-	wchar = NULL;
+	var->spec_len = 1;
 	if (var->mod_len == 0)
 		var->arg = (char *)chartostring((int)var->arg);
 	else if (var->mod_len == 1 && var->modifier[0] == 'l')
 	{
-		wchar = wchar_manager(var);
-		var->arg = wchartostring(wchar);
+		var->mod_len = 0;
+		spec_lc(var);
 	}
 	else
 		return ((var->error = -1));
-	var->spec_len = 1;
 	return (0);
 }
 
@@ -92,13 +89,19 @@ int				spec_lc(t_var *var)
 	t_wchar		*wchar;
 
 	wchar = NULL;
-	if (var->mod_len != 0)
-		return ((var->error = -1));
-	else
-	{
-		wchar = wchar_manager(var);
-		var->arg = wchartostring(wchar);
+	wchar = wchar_manager(var);
+	var->arg = wchartostring(wchar);
+	var->spec_len = ft_strlen(var->arg);
+	if (var->spec_len == 0)
 		var->spec_len = 1;
-	}
+	if (wchar)
+		free_wchar(wchar);
+	return (0);
+}
+
+int				spec_percent(t_var *var)
+{
+	var->arg = chartostring((int)'%');
+	var->spec_len = 1;
 	return (0);
 }

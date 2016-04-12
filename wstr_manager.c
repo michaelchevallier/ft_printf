@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wchar_manager.c                                    :+:      :+:    :+:   */
+/*   wstr_manager.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/30 19:05:14 by mchevall          #+#    #+#             */
-/*   Updated: 2016/03/31 18:14:41 by mchevall         ###   ########.fr       */
+/*   Created: 2016/04/11 16:03:04 by mchevall          #+#    #+#             */
+/*   Updated: 2016/04/11 16:57:30 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void			octaltoint(char *oct, t_wchar *wchar, int index)
 		i++;
 		j--;
 	}
-	free(oct);
+	((oct) ? free(oct) : 0);
 }
 
 static void			wchar_initializer(t_wchar *wchar, wchar_t str)
@@ -106,5 +106,6 @@ t_wchar				*wstr_manager(wchar_t str)
 		octaltoint(ft_strsub(bin, (i * 8), 8), wchar, i);
 		i++;
 	}
+	ft_strdel(&bin);
 	return (wchar);
 }

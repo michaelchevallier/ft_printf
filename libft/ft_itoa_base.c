@@ -6,7 +6,7 @@
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 17:11:24 by mchevall          #+#    #+#             */
-/*   Updated: 2016/03/21 17:10:25 by mchevall         ###   ########.fr       */
+/*   Updated: 2016/04/04 19:48:44 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static char				*calc(intmax_t n, int i, char *chain, int base)
 	return (chain);
 }
 
-char					*ft_itoa_base(intmax_t n, int base)
+char					*ft_itoa_base(intmax_t n, size_t base)
 {
 	char			*chain;
 	int				i;

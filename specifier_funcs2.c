@@ -6,7 +6,7 @@
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 14:58:30 by mchevall          #+#    #+#             */
-/*   Updated: 2016/03/29 16:07:46 by mchevall         ###   ########.fr       */
+/*   Updated: 2016/04/11 15:49:00 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,8 @@ int		spec_o(t_var *var)
 
 int		spec_lo(t_var *var)
 {
-	if (var->mod_len != 0)
-		return ((var->error = -1));
-	else
-	{
-		var->arg = ft_itoa_baseuint((unsigned long int)var->arg, 8);
-		var->spec_len = ft_strlen(var->arg);
-	}
+	var->arg = ft_itoa_baseuint((unsigned long int)var->arg, 8);
+	var->spec_len = ft_strlen(var->arg);
 	return (0);
 }
 
@@ -90,12 +85,7 @@ int		spec_u(t_var *var)
 
 int		spec_lu(t_var *var)
 {
-	if (var->mod_len != 0)
-		var->error = -1;
-	else
-	{
-		var->arg = ft_itoa_baseuint((unsigned long int)var->arg, 10);
-		var->spec_len = ft_strlen(var->arg);
-	}
+	var->arg = ft_itoa_baseuint((unsigned long int)var->arg, 10);
+	var->spec_len = ft_strlen(var->arg);
 	return (0);
 }

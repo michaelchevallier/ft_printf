@@ -6,7 +6,7 @@
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/30 17:37:55 by mchevall          #+#    #+#             */
-/*   Updated: 2016/03/31 18:15:09 by mchevall         ###   ########.fr       */
+/*   Updated: 2016/04/05 16:28:06 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ void			ft_putwchar(int *wchar)
 		write(1, &(wchar[i]), 1);
 		i++;
 	}
-	free(wchar);
+	if (wchar)
+		free(wchar);
 }

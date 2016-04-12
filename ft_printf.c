@@ -6,131 +6,96 @@
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 10:09:54 by mchevall          #+#    #+#             */
-/*   Updated: 2016/03/31 18:17:06 by mchevall         ###   ########.fr       */
+/*   Updated: 2016/04/12 20:36:24 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void		var_initializer(t_var *var)
+static void		funcs_finder(t_var *var, int specifier)
 {
-	var->arg = NULL;
-	var->counter = 0;
-	var->tmp = NULL;
-	if (var->format_specifier)
-		free(var->format_specifier);
-	var->format_specifier = (char *)ft_memalloc(sizeof(char));
-	var->specifier = -1;
-	if (var->modifier)
-		free(var->modifier);
-	var->modifier = (char *)ft_memalloc(sizeof(char));
-	if (var->flags)
-		free(var->flags);
-	var->flags = (int *)ft_memalloc(sizeof(int) * NB_FLAGS + 1);
-	var->flags[NB_FLAGS] = -1;
-	var->width = -1;
-	var->precision = -1;
-	var->mod_len = 0;
-	var->spec_len = 0;
+	static const t_funcs	funcs[] = {spec_s, spec_ls, spec_p, spec_d, spec_ld,
+		spec_i, spec_o, spec_lo, spec_u, spec_lu, spec_x, spec_lx, spec_c,
+		spec_lc, spec_percent};
+
+	funcs[specifier](var);
 }
 
-int			ft_printf(const char *format, ...)
+static int		percent_found(const char *format, va_list ap, t_var *var, int i)
 {
-	va_list			ap;
-	t_var			*var;
+	if (format[i + 1] == '%')
+	{
+		var->str = UJ_N_F(var->str, ft_strsub(format, i + 1, 1), 0);
+		i += 1;
+		var->global_count++;
+	}
+	else
+	{
+		if ((i = specifier_finder(format, var, i, ap)) == -1)
+			return ((var->error = -1));
+		format_specifier_manager(var);
+		funcs_finder(var, var->specifier);
+		if (var->specifier == -1 || var->error == -1)
+			return ((var->error = -1));
+		var->tmpstr = UJ_N_F(var->tmpstr, var->arg, 0);
+		precision_manager(var);
+		if (var->tmpstr && var->error == 0)
+			var->str = UUJ_N_F(var->str, var->tmpstr, 1);
+		var->global_count += var->spec_len;
+	}
+	return (i);
+}
+
+static void		mini_init(t_var *var)
+{
+	var->str = (unsigned char *)ft_memalloc(sizeof(unsigned char));
+	var->error = 0;
+	var->global_count = 0;
+}
+
+static int		format_manager(const char *format, va_list ap, t_var *var)
+{
 	int				i;
 
 	i = 0;
-	var = (t_var *)ft_memalloc(sizeof(t_var));
-	var->str = (unsigned char *)ft_memalloc(sizeof(unsigned char));
-	var->error = 0;
-	va_start(ap, format);
 	while (format[i])
 	{
 		if (format[i] != '%')
-			var->str = ft_ustrjoin_and_free(var->str, ft_strsub(format, i, 1), 0);
-		else
 		{
-			if (format[i + 1] == '%')
-			{
-				var->str = ft_ustrjoin_and_free(var->str, ft_strsub(format, i + 1, 1), 2);
-				i += 2;
-			}
-			else
-			{
-				i = specifier_finder(format, var, i, ap);
-				format_specifier_manager(var);
-				if (var->specifier == 0)
-					spec_s(var);
-				if (var->specifier == 1)
-					spec_ls(var);
-				if (var->specifier == 2)
-					spec_p(var);
-				if (var->specifier == 3)
-					spec_d(var);
-				if (var->specifier == 4)
-					spec_ld(var);
-				if (var->specifier == 5)
-					spec_i(var);
-				if (var->specifier == 6)
-					spec_o(var);
-				if (var->specifier == 7)
-					spec_lo(var);
-				if (var->specifier == 8)
-					spec_u(var);
-				if (var->specifier == 9)
-					spec_lu(var);
-				if (var->specifier == 10)
-					spec_x(var);
-				if (var->specifier == 11)
-					spec_lx(var);
-				if (var->specifier == 12)
-					spec_c(var);
-				if (var->specifier == 13)
-					spec_lc(var);
-				if (var->specifier == -1)
-					var->error = -1;
-				if (var->error == 0)
-						var->str = ft_ustrjoin_and_free(var->str, var->arg, 1);
-			}
+			var->str = UJ_N_F(var->str, ft_strsub(format, i, 1), 0);
+			var->global_count += 1;
 		}
+		else if ((i = percent_found(format, ap, var, i)) == -1)
+			return ((var->error = -1));
 		i++;
+		free_all(var, 0);
 	}
-	int j = 0;
-	printf("\nsc:%c\n", SPECIFIER[var->specifier]);
-	printf("\nsc:%d\n", var->specifier);
-	printf("arg:%S\n", (wchar_t *)var->arg);
-	printf("fspe:%s\n", var->format_specifier);
-	printf("pre str:%s\n", var->str);
-	printf("flags: #:%d 0:%d ' ':%d +:%d -:%d\n", var->flags[0],var->flags[1],var->flags[2],var->flags[3],var->flags[4]);
-	printf("width: %d\n", var->width);
-	printf("error: %d\n", var->error);
-	printf("precision: %d\n", var->precision);
-	printf("modifier: %s\n", var->modifier);
-	printf("mod_len: %d\n", var->mod_len);
-	printf("spec_len: %d\n", var->spec_len);
-	ft_putstr("\nreal str :");
+	return (i);
+}
+
+int				ft_printf(const char *format, ...)
+{
+	va_list			ap;
+	t_var			*var;
+	int				j;
+
+	j = 0;
+	var = (t_var *)ft_memalloc(sizeof(t_var));
+	mini_init(var);
+	va_start(ap, format);
+	format_manager(format, ap, var);
 	if (var->error == 0)
 		while (var->str[j])
 		{
 			ft_putchar(var->str[j]);
 			j++;
 		}
+	else
+	{
+		free_all(var, 1);
+		return (-1);
+	}
 	va_end(ap);
-	return (var->error);
-}
-
-int 		main(void)
-{
-//	wchar_t bob = L'α';
-//	wchar_t joe = L'Ω';
-
-	setlocale(LC_CTYPE, "");
-//	if (joe == 1)
-//		return(0);
-	//printf("Original\n s: %s hello p: %p d: %d D: %D i:%i o:%o\n O:%O\n u:%u U: %U x:%x X:%X c:%c C:%C\n", "bob", "Johnny", 42, 16, 255, 16, 17, 233, 245, 255, 255, 0, 'B');
-	//ft_printf("\ns: %s S: %S hello p: %p d: %d D: %D i:%i o:%o O:%O u:%u U: %U x:%x X:%X c:%c C:%C\ni %% %d", "bob", "JOEY", "Johnny", 42, 16, 255, 16, 17, 233, 245, 255, 255, 96, 'B', 42);
-	wprintf(L"real printf:hello: %ls\n", L"αΩ");
-	ft_printf(" Toto %ls\n\n", L"αΩ");
-	return (0);
+	free_all(var, 1);
+	return (var->global_count);
 }

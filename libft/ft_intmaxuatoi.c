@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_intmaxuatoi.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/04 15:53:09 by mchevall          #+#    #+#             */
-/*   Updated: 2016/04/04 15:53:40 by mchevall         ###   ########.fr       */
+/*   Created: 2016/04/06 16:02:05 by mchevall          #+#    #+#             */
+/*   Updated: 2016/04/06 16:32:27 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
+#include <stdint.h>
 
-int		ft_atoi(const char *str)
+intmax_t		ft_intmaxuatoi(const unsigned char *str)
 {
-	size_t		i;
-	int			isneg;
-	int			result;
+	size_t				i;
+	int					isneg;
+	intmax_t			result;
 
 	i = 0;
 	result = 0;

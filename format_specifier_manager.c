@@ -6,7 +6,7 @@
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 17:49:49 by mchevall          #+#    #+#             */
-/*   Updated: 2016/03/31 14:58:05 by mchevall         ###   ########.fr       */
+/*   Updated: 2016/04/12 19:43:36 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static int			remove_flags(t_var *var)
 	if (var->flags[2] == 1 &&
 			ft_strchr("deEfgGi", SPECIFIER[var->specifier]) == NULL)
 		var->flags[2] = 0;
+	if (var->precision < 0 && var->prec_on == 1)
+		var->precision = 0;
 	return (0);
 }
 
@@ -77,27 +79,46 @@ static int			is_modifier(t_var *var, int counter)
 		if (var->modifier[0] != 'h' && var->modifier[0] != 'l')
 			return ((var->error = -8));
 		if ((var->modifier[0] == 'h' && var->modifier[1] != 'h') ||
-			(var->modifier[0] == 'l' && var->modifier[1] != 'l'))
+				(var->modifier[0] == 'l' && var->modifier[1] != 'l'))
 			return ((var->error = -9));
 	}
+	remove_flags(var);
 	return (1);
+}
+
+static int			precision_format(t_var *var, int counter)
+{
+	char		*str;
+
+	var->prec_on = 1;
+	str = ft_itoa(var->precision);
+	if (ft_isdigit(var->FS[counter + 1]) == 0)
+	{
+		var->precision = 0;
+		counter++;
+	}
+	else
+	{
+		var->precision = ft_atoi(&var->FS[counter + 1]);
+		counter += 1 + ft_strlen(str);
+	}
+	ft_strdel(&str);
+	return (counter);
 }
 
 void				format_specifier_manager(t_var *var)
 {
 	int			counter;
+	char		*str;
 
 	counter = 0;
-	var->tmp = var->format_specifier;
 	counter = valid_flags(var);
 	var->width = ft_atoi(&var->FS[counter]);
+	str = ft_itoa(var->width);
 	if (var->width > 0)
-		counter += ft_strlen(ft_itoa(var->width));
+		counter += ft_strlen(str);
 	if (var->FS[counter] == '.')
-	{
-		var->precision = ft_atoi(&var->FS[counter + 1]);
-		counter += 1 + ft_strlen(ft_itoa(var->precision));
-	}
+		counter = precision_format(var, counter);
 	is_modifier(var, counter);
-	remove_flags(var);
+	ft_strdel(&str);
 }
