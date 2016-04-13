@@ -6,7 +6,7 @@
 #    By: mchevall <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/26 14:43:40 by mchevall          #+#    #+#              #
-#    Updated: 2016/04/12 14:12:54 by mchevall         ###   ########.fr        #
+#    Updated: 2016/04/13 15:04:39 by mchevall         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,8 @@ SRC = ft_printf.c\
 	  specifier_funcs.c\
 	  specifier_funcs2.c\
 	  specifier_funcs3.c\
+	  specifier_funcs4.c\
+	  specifier_funcs5.c\
 	  wchar_manager.c\
 	  funcs.c\
 	  funcs2.c\
@@ -26,7 +28,7 @@ SRC = ft_printf.c\
 	  flag_manager.c\
 	  width_manager.c
 SRCO = $(SRC:.c=.o)
-##FLAG = -Wall -Werror -Wextra
+FLAG = -Wall -Werror -Wextra
 
 all: $(NAME)
 

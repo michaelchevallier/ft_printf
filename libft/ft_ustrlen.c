@@ -6,7 +6,7 @@
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/31 14:39:44 by mchevall          #+#    #+#             */
-/*   Updated: 2016/03/31 14:40:14 by mchevall         ###   ########.fr       */
+/*   Updated: 2016/04/13 14:17:14 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t		ft_ustrlen(unsigned char *s)
 	int		i;
 
 	i = 0;
+	if (!s)
+		return (0);
 	while (s[i] != '\0')
 	{
 		i++;

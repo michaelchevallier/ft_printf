@@ -6,7 +6,7 @@
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/04 15:31:51 by mchevall          #+#    #+#             */
-/*   Updated: 2016/04/12 16:27:00 by mchevall         ###   ########.fr       */
+/*   Updated: 2016/04/13 16:56:03 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static void			sharp_manager(t_var *var, unsigned char *str)
 {
-	if (ft_uintmaxuatoi(var->tmpstr) != 0)
+	if (ft_uintmaxuatoi(var->tmpstr) != 0 ||
+			(var->tmpstr[0] >= 97 && var->tmpstr[0] <= 102))
 	{
 		if (var->specifier == 6 || var->specifier == 7)
 		{
@@ -36,12 +37,15 @@ static void			sharp_manager(t_var *var, unsigned char *str)
 
 static void			space_manager(t_var *var, unsigned char *str)
 {
-	if (var->specifier >= 3 && var->specifier <= 5)
+	if (var->prec_on == 0)
 	{
-		if (ft_uatoi(var->tmpstr) > 0)
+		if (var->specifier >= 3 && var->specifier <= 5)
 		{
-			var->tmpstr = ft_uustrjoin_and_free(str, var->tmpstr, 2);
-			var->spec_len++;
+			if (ft_uatoi(var->tmpstr) > 0)
+			{
+				var->tmpstr = ft_uustrjoin_and_free(str, var->tmpstr, 2);
+				var->spec_len++;
+			}
 		}
 	}
 }

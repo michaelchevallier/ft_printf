@@ -6,7 +6,7 @@
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 10:09:54 by mchevall          #+#    #+#             */
-/*   Updated: 2016/04/12 20:36:24 by mchevall         ###   ########.fr       */
+/*   Updated: 2016/04/13 17:01:32 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void		funcs_finder(t_var *var, int specifier)
 {
 	static const t_funcs	funcs[] = {spec_s, spec_ls, spec_p, spec_d, spec_ld,
 		spec_i, spec_o, spec_lo, spec_u, spec_lu, spec_x, spec_lx, spec_c,
-		spec_lc, spec_percent};
+		spec_lc, spec_percent, spec_b};
 
 	funcs[specifier](var);
 }
@@ -34,6 +34,8 @@ static int		percent_found(const char *format, va_list ap, t_var *var, int i)
 		if ((i = specifier_finder(format, var, i, ap)) == -1)
 			return ((var->error = -1));
 		format_specifier_manager(var);
+		if (var->error == -1)
+			return (-1);
 		funcs_finder(var, var->specifier);
 		if (var->specifier == -1 || var->error == -1)
 			return ((var->error = -1));
@@ -85,7 +87,7 @@ int				ft_printf(const char *format, ...)
 	va_start(ap, format);
 	format_manager(format, ap, var);
 	if (var->error == 0)
-		while (var->str[j])
+		while (j < var->global_count)
 		{
 			ft_putchar(var->str[j]);
 			j++;

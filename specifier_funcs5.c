@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   specifier_funcs5.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/23 17:29:14 by mchevall          #+#    #+#             */
-/*   Updated: 2016/04/13 14:16:28 by mchevall         ###   ########.fr       */
+/*   Created: 2016/04/13 15:00:40 by mchevall          #+#    #+#             */
+/*   Updated: 2016/04/13 15:09:39 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-size_t		ft_strlen(const char *s)
+int			spec_b(t_var *var)
 {
-	int		i;
-
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i] != '\0')
+	if (var->mod_len != 0)
+		return ((var->error = -1));
+	else
 	{
-		i++;
+		var->arg = ft_itoa_baseuint((uintmax_t)var->arg, 2);
 	}
-	return (i);
+	return (var->spec_len = ft_strlen(var->arg));
 }

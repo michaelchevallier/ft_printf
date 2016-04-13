@@ -6,7 +6,7 @@
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 14:37:15 by mchevall          #+#    #+#             */
-/*   Updated: 2016/04/12 15:28:24 by mchevall         ###   ########.fr       */
+/*   Updated: 2016/04/13 15:07:56 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 # include "libft/includes/libft.h"
 # include <stdarg.h>
 # define NB_FLAGS 5
-# define NB_SPEC 15
+# define NB_SPEC 16
 # define J_N_F ft_strjoin_and_free
 # define UJ_N_F ft_ustrjoin_and_free
 # define UUJ_N_F ft_uustrjoin_and_free
 # define FS format_specifier
 # define FLAGS "#0 +-"
 # define MODIFIER "hljz"
-# define SPECIFIER "sSpdDioOuUxXcC%"
+# define SPECIFIER "sSpdDioOuUxXcC%b"
 
 typedef struct			s_var
 {
@@ -80,6 +80,7 @@ int						spec_lx(t_var *var);
 int						spec_c(t_var *var);
 int						spec_lc(t_var *var);
 int						spec_percent(t_var *var);
+int						spec_b(t_var *var);
 void					ft_putwchar(int *wchar);
 t_wchar					*wchar_manager(t_var *var);
 t_wchar					*wstr_manager(wchar_t str);

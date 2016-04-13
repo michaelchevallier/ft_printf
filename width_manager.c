@@ -6,7 +6,7 @@
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/11 15:44:29 by mchevall          #+#    #+#             */
-/*   Updated: 2016/04/12 16:27:21 by mchevall         ###   ########.fr       */
+/*   Updated: 2016/04/13 17:14:54 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,11 @@ void					width_manager(t_var *var)
 		var->width--;
 	if (var->flags[0] == 1 && var->flags[1] == 1)
 	{
-		if (var->specifier == 6 || var->specifier == 7)
+		if ((var->specifier == 6 || var->specifier == 7) &&
+				ft_intmaxuatoi(var->tmpstr) != 0)
 			var->width -= 1;
-		else if (var->specifier == 10 || var->specifier == 11)
+		else if ((var->specifier == 10 || var->specifier == 11) &&
+				ft_intmaxuatoi(var->tmpstr) != 0)
 			var->width -= 2;
 	}
 	if (var->width > var->spec_len)
